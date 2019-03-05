@@ -12,6 +12,11 @@
                       [inputTooltipText]="'Reset sorting'"
                       (outputClicked)="resetSorting()">
         </terra-button>
+        <terra-toggle [inputIcon]="'icon-edit'"
+                      [inputTooltipText]="'Tabelle bearbeiten'"
+                      [inputTooltipPlacement]="'right'"
+                      [(ngModel)]="_isToggled">
+        </terra-toggle>
     </div>
 </terra-base-toolbar>
 
@@ -42,7 +47,11 @@
             <span *ngIf="!isEdited(index)">{{ row.data.value }}</span>
             
             <form *ngIf="isEdited(index)" (submit)="stopEditing()">
-                <terra-text-input name="value" inputName="Edit value" [(ngModel)]="row.data.value"></terra-text-input>
+                <!--&lt;!&ndash; <terra-text-input name="value" inputName="Edit value" [(ngModel)]="row.data.value"></terra-text-input>-->
+                <terra-select-box
+                    inputName="language"
+                    [inputListBoxValues]="_selectableOptionTypesList">
+                </terra-select-box>
             </form>
         </td>
         <td>
@@ -51,19 +60,91 @@
             </div>
             
             <form *ngIf="isEdited(index)" (submit)="stopEditing()">
-                <terra-text-input name="email" inputName="Edit mail" [(ngModel)]="row.data.mail"></terra-text-input>
+                <terra-text-input name="email" [(ngModel)]="row.data.mail"></terra-text-input>
             </form>
         </td>
         <td>
             <terra-button *ngIf="!isEdited(index)"
                           (outputClicked)="buttonClicked(row); $event.stopPropagation()"
-                          [inputIcon]="'icon-add'"
-                          [inputIsSmall]="true">
+                          [inputIcon]="'icon-add'">
             </terra-button>
             <terra-button *ngIf="isEdited(index)"
                           (outputClicked)="stopEditing(); $event.stopPropagation()"
-                          [inputIcon]="'icon-save'"
-                          [inputIsSmall]="true">
+                          [inputIcon]="'icon-save'">
+            </terra-button>
+            <terra-radio-button inputCaption="Yes"
+                                [inputValue]="false">
+            </terra-radio-button>
+            <terra-toggle [inputIcon]="'icon-confirm'"
+                          [inputTooltipText]="'Test toggle aktivieren?'">
+            </terra-toggle>
+        </td>
+    </tr>
+    <tr [tcTableRow]="row" hasContextMenu [rowData]="row.data" *ngFor="let row of service.rowList; let index = index" (dblclick)="startEditing(index)">
+        <td>{{ row.data.id }}</td>
+        <td>
+            <span *ngIf="!isEdited(index)">{{ row.data.value }}</span>
+        
+            <form *ngIf="isEdited(index)" (submit)="stopEditing()">
+                <terra-date-picker
+                    inputName="Date-Picker">
+                </terra-date-picker>
+            </form>
+        </td>
+        <td>
+            <div *ngIf="!isEdited(index)">
+                <a [href]="'mailto:' + row.data.mail" (dblclick)="$event.stopPropagation()">{{ row.data.mail }}</a>
+            </div>
+        
+            <form *ngIf="isEdited(index)" (submit)="stopEditing()">
+                <terra-color-picker
+                    inputName="Color-Picker"
+                    [(ngModel)]="color">
+                </terra-color-picker>
+            </form>
+        </td>
+        <td>
+            <terra-button *ngIf="!isEdited(index)"
+                          (outputClicked)="buttonClicked(row); $event.stopPropagation()"
+                          [inputIcon]="'icon-add'">
+            </terra-button>
+            <terra-button *ngIf="isEdited(index)"
+                          (outputClicked)="stopEditing(); $event.stopPropagation()"
+                          [inputIcon]="'icon-save'">
+            </terra-button>
+        </td>
+    </tr>
+    <tr [tcTableRow]="row" hasContextMenu [rowData]="row.data" *ngFor="let row of service.rowList; let index = index" (dblclick)="startEditing(index)">
+        <td>{{ row.data.id }}</td>
+        <td>
+            <span *ngIf="!isEdited(index)">{{ row.data.value }}</span>
+        
+
+                <terra-multi-check-box [(ngModel)]="values"
+                                       [inputIsDisabled]="disabled1">
+                </terra-multi-check-box>
+ 
+        </td>
+        <td>
+            <div *ngIf="!isEdited(index)">
+                <a [href]="'mailto:' + row.data.mail" (dblclick)="$event.stopPropagation()">{{ row.data.mail }}</a>
+            </div>
+        
+            <form *ngIf="isEdited(index)" (submit)="stopEditing()">
+                <terra-color-picker
+                    inputName="Color-Picker"
+                    [(ngModel)]="color">
+                </terra-color-picker>
+            </form>
+        </td>
+        <td>
+            <terra-button *ngIf="!isEdited(index)"
+                          (outputClicked)="buttonClicked(row); $event.stopPropagation()"
+                          [inputIcon]="'icon-add'">
+            </terra-button>
+            <terra-button *ngIf="isEdited(index)"
+                          (outputClicked)="stopEditing(); $event.stopPropagation()"
+                          [inputIcon]="'icon-save'">
             </terra-button>
         </td>
     </tr>

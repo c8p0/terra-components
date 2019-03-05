@@ -18,7 +18,7 @@ export class TerraDataTableServiceExample extends TerraDataTableBaseService<Terr
     constructor()
     {
         super();
-        this.defaultPagingSize = 50;
+        this.defaultPagingSize = 5;
     }
 
     // This method usually just requests data from the server via REST using another service, which has to be injected in the constructor

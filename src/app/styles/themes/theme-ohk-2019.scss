@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Short+Stack');
+
+body
+{
+    &.theme-ohk-2019
+    {
+        //--tabs-background-color: var(--color-alert);
+        --tabs-nav-item-box-shadow: var(--box-shadow);
+        --tabs-border-bottom-width: 4px;
+        --box-shadow: 1px 1px 0px 3px var(--color-structure-13);
+        --border-radius: none;
+        --nav-box-shadow: var(--box-shadow);
+        --nav-link-border: none;
+    
+        font-family: 'Short Stack', cursive;
+        
+        &.theme-light
+        {
+            terra-nav-bar
+            {
+                .navbar-brand-desktop
+                {
+                    &:after
+                    {
+                        background-image: url('https://i.imgur.com/xXk15HU.png');
+                    }
+                    
+                    .nav-link
+                    {
+                        background-color: transparent !important;
+    
+                        span
+                        {
+                            color: var(--color-alert-dark) !important;
+                        }
+                    }
+                }
+            }
+        }
+        
+        &.theme-dark
+        {
+            terra-nav-bar
+            {
+    
+                .navbar-brand-desktop
+                {
+                    &:after
+                    {
+                        background-image: url('https://i.imgur.com/plAj8zQ.png');
+                    }
+                }
+            }
+        }
+        
+        .tabs
+        {
+            border-color: var(--color-structure-13) !important;
+        }
+        
+        #tab-content
+        {
+            transition: var(--transition-lg);
+            background-image: url(https://i.imgur.com/gPhPpHW.png);
+            background-position: top center;
+            background-size: cover;
+        }
+        
+        terra-nav-bar
+        {
+            .navbar-brand-desktop
+            {
+                &:after
+                {
+                    transition: var(--transition-lg);
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+            }
+        }
+        
+        .ohk-2019-banner
+        {
+            position: absolute;
+            bottom: 0;
+            height: 50vh;
+            width: 50%;
+            transform: translateX(50%);
+            background-image: url(https://www.plentymarkets.eu/documents/category/3849/congress-2019-heroes-powered-by-paypal.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            transition: var(--transition-lg);
+        
+            &:hover
+            {
+                transform: translateX(50%) scale(1.05);
+            }
+        }
+    }
+}
+
+
+
+

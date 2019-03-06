@@ -88,21 +88,8 @@ body
         
         .ohk-2019-banner
         {
-            position: absolute;
-            bottom: 0;
             height: 50vh;
-            width: 50%;
-            transform: translateX(50%);
-            background-image: url(https://www.plentymarkets.eu/documents/category/3849/congress-2019-heroes-powered-by-paypal.png);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center bottom;
             transition: var(--transition-lg);
-        
-            &:hover
-            {
-                transform: translateX(50%) scale(1.05);
-            }
         }
     }
 }

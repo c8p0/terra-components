@@ -81,7 +81,7 @@ export class TerraFormEntryComponent implements OnInit, AfterViewInit, OnChanges
     {
         this.containerClass = 'form-entry-' + this.inputFormField.type;
 
-        this.formControl = new FormControl(this.inputFormValue, TerraFormFieldHelper.generateValidators(this.inputFormField));
+        this.formControl = new FormControl(this.inputFormValue);
 
         this.formControl.statusChanges.subscribe((status:any) =>
         {

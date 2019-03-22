@@ -1,8 +1,8 @@
 import {
     Component,
-    ElementRef,
     Input,
-    OnInit
+    OnInit,
+    ViewChild
 } from '@angular/core';
 import { TranslationService } from 'angular-l10n';
 import {
@@ -10,6 +10,7 @@ import {
     NG_VALUE_ACCESSOR
 } from '@angular/forms';
 import { isNullOrUndefined } from 'util';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
     selector:  'terra-base-editor',
@@ -42,8 +43,10 @@ export class TerraBaseEditorComponent implements OnInit, ControlValueAccessor
     protected value:string;
     protected modules:{ [index:string]:Object };
 
-    constructor(protected translation:TranslationService,
-                protected myElement:ElementRef)
+    @ViewChild(QuillEditorComponent)
+    private quillEditor:QuillEditorComponent;
+
+    constructor(protected translation:TranslationService)
     {
         // initialize placeholder
         this.placeholder = this.translation.translate('terraNoteEditor.insertText');
@@ -84,7 +87,10 @@ export class TerraBaseEditorComponent implements OnInit, ControlValueAccessor
 
     public focus():void
     {
-        this.myElement.nativeElement.querySelector('.ql-editor').focus();
+        if(!isNullOrUndefined(this.quillEditor))
+        {
+            this.quillEditor.editorElem.focus();
+        }
     }
 
     protected onChangeCallback:(_:any) => void = ():void => undefined;

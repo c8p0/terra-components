@@ -1,7 +1,4 @@
-import {
-    Component,
-    ElementRef
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslationService } from 'angular-l10n';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TerraBaseEditorComponent } from '../base-editor/terra-base-editor.component';
@@ -20,9 +17,9 @@ import { TerraBaseEditorComponent } from '../base-editor/terra-base-editor.compo
 })
 export class TerraNoteEditorComponent extends TerraBaseEditorComponent
 {
-    constructor(protected translation:TranslationService, protected myElement:ElementRef)
+    constructor(protected translation:TranslationService)
     {
-        super(translation, myElement);
+        super(translation);
         // initialize placeholder
         this.placeholder = this.translation.translate('terraNoteEditor.insertText');
 

@@ -1,6 +1,5 @@
 import {
     Component,
-    ElementRef,
     OnInit,
     ViewChild
 } from '@angular/core';
@@ -46,9 +45,9 @@ export class TerraCodeEditorComponent extends TerraBaseEditorComponent implement
 
     private linter:HtmlLinter;
 
-    constructor(protected translation:TranslationService, protected myElement:ElementRef)
+    constructor(protected translation:TranslationService)
     {
-        super(translation, myElement);
+        super(translation);
         // initialize placeholder
         this.placeholder = this.translation.translate('terraNoteEditor.insertText');
 

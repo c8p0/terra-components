@@ -26,17 +26,22 @@
                     [ngStyle]="{ 'text-align': getTextAlign(header) }"
                     [class.sortable]="isSortable(header)"
                     (click)="columnHeaderClicked.emit(header)">
+
+                    <div>
                     <span [container]="'body'"
                           [placement]="checkTooltipPlacement(header.tooltipPlacement)"
                           [tooltip]="header.tooltipText"
                           [isDisabled]="!header.tooltipText || header.tooltipText.length == 0">
                           {{header.caption}}
-                        
+
                         <span
-                            [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
+                                [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
                         </span>
                     </span>
-                
+                        <span class="pull-md-right" style="background-color: white">test</span>
+
+                    </div>
+
                 </th>
             </ng-template>
         </tr>

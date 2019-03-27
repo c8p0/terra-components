@@ -33,19 +33,17 @@
                           [tooltip]="header.tooltipText"
                           [isDisabled]="!header.tooltipText || header.tooltipText.length == 0">
                           {{header.caption}}
-
                         <span
                                 [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
                         </span>
                     </span>
-                        <span class="pull-md-right" style="background-color: white">test</span>
-
+                        <span class="pull-md-right">
+                            <div class="separator">|</div>
+                        </span>
                     </div>
-
                 </th>
             </ng-template>
         </tr>
-        </thead>
         <tbody *ngIf="!useContentBody">
         <tr *ngFor="let row of rowList" [tcTableRow]="row" hasContextMenu [rowData]="row.data">
             <ng-template ngFor let-cell [ngForOf]="row.cellList" let-i="index">

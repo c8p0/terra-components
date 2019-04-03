@@ -43,7 +43,7 @@
                         transition: padding var(--transition-lg);
                         border: none;
                         resize: horizontal;
-                        overflow: hidden;
+                        overflow: auto;
                         width: auto;
                         white-space: nowrap;
 
@@ -58,31 +58,6 @@
                             @include font-rendering;
                         }
 
-                        .separator
-                        {
-                            height: 20px !important;
-                            width: 3px;
-                            border-style: solid;
-                            border-width: 5px 1px;
-                            float: left;
-                            margin-left: 0 !important;
-                            color: #FFFFFF;
-                            position: relative;
-                            border-color: #FFFFFF;
-                            background-color: #FFFFFF;
-                            font-size: 14px;
-                            font-weight: 400;
-                        }
-
-                        .separator:hover
-                        {
-                            width: 6px;
-                            background-color: #24B3E0;
-                            border-color: #24B3E0;
-                            color: #24B3E0;
-                            cursor: col-resize;
-                            border-radius: 6px;
-                        }
 
                     }
                 }
@@ -144,7 +119,7 @@
                 vertical-align: middle;
             }
 
-            > tbody tr:hover
+            tbody tr:hover
             {
                 background: var(--color-structure-2);
                 cursor: pointer;
@@ -193,4 +168,34 @@ terra-pager
 {
     --toolbar-border-radius: var(--border-radius) var(--border-radius) 0 0;
     --toolbar-margin: 0 var(--space-xs) var(--space-sm) var(--space-xs);
+}
+
+th:hover
+{
+    .separator
+    {
+        position: relative;
+        height: 20px !important;
+        width: 3px;
+        border-width: 5px 1px;
+        float: left;
+        margin-left: 0 !important;
+        color: #FFFFFF;
+        user-select: none;
+        border-color: #FFFFFF;
+        background-color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .separator::after
+    {
+        width: 6px;
+        background-color: #24B3E0;
+        border-color: #24B3E0;
+        color: #24B3E0;
+        cursor: col-resize;
+        border-radius: 6px;
+        resize: horizontal;
+    }
 }

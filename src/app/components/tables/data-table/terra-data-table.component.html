@@ -26,19 +26,18 @@
                     [ngStyle]="{ 'text-align': getTextAlign(header) }"
                     [class.sortable]="isSortable(header)"
                     (click)="columnHeaderClicked.emit(header)">
-
                     <div>
-                    <span [container]="'body'"
-                          [placement]="checkTooltipPlacement(header.tooltipPlacement)"
-                          [tooltip]="header.tooltipText"
-                          [isDisabled]="!header.tooltipText || header.tooltipText.length == 0">
-                          {{header.caption}}
-                        <span
-                                [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
+                        <span [container]="'body'"
+                              [placement]="checkTooltipPlacement(header.tooltipPlacement)"
+                              [tooltip]="header.tooltipText"
+                              [isDisabled]="!header.tooltipText || header.tooltipText.length == 0">
+                              {{header.caption}}
+                            <span
+                                    [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
+                            </span>
                         </span>
-                    </span>
                         <span class="pull-md-right">
-                            <div class="separator">|</div>
+                            <span class="separator"></span>
                         </span>
                     </div>
                 </th>

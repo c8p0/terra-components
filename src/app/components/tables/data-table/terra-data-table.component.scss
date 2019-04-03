@@ -189,14 +189,13 @@ th:hover
         font-weight: 400;
     }
 
-    .separator::after
+    .separator:hover
     {
         width: 6px;
         background-color: #24B3E0;
         border-color: #24B3E0;
         color: #24B3E0;
-        cursor: col-resize;
         border-radius: 6px;
-        resize: horizontal;
+        cursor: col-resize;
     }
 }

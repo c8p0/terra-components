@@ -177,25 +177,21 @@ th:hover
     {
         position: relative;
         height: 20px !important;
-        width: 3px;
+        width: 4px;
         border-width: 5px 1px;
-        float: left;
         margin-left: 0 !important;
-        color: #FFFFFF;
-        user-select: none;
-        border-color: #FFFFFF;
-        background-color: #FFFFFF;
-        font-size: 14px;
-        font-weight: 400;
+        color: white;
+        border-color: white;
+        background-color: white;
+        border-radius: 20px;
+        float: right;
     }
 
     .separator:hover
     {
-        width: 6px;
         background-color: #24B3E0;
         border-color: #24B3E0;
         color: #24B3E0;
-        border-radius: 6px;
         cursor: col-resize;
     }
 }

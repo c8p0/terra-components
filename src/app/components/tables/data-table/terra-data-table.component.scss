@@ -44,8 +44,8 @@
                         border: none;
                         resize: horizontal;
                         overflow: auto;
-                        width: auto;
                         white-space: nowrap;
+                        width: auto;
 
                         &.sortable
                         {
@@ -84,6 +84,7 @@
                         border-bottom: 1px solid var(--border-color);
                         border-top: 1px solid var(--border-color);
                         white-space: nowrap;
+                        width: auto;
 
                         span
                         {

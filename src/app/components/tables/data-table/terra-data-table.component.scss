@@ -42,8 +42,6 @@
                         padding: var(--table-head-th-padding, var(--space-md));
                         transition: padding var(--transition-lg);
                         border: none;
-                        resize: horizontal;
-                        overflow: auto;
                         white-space: nowrap;
                         width: auto;
 
@@ -208,13 +206,15 @@ th:hover
         font-size: 10px;
         position: absolute;
         height: 25px;
-        width: 20px;
+        width: 30px;
         right: -8px;
-        top: 1px;
+        top: 3px;
         text-align: center;
-        background-color: black;
+        background-color: #636671;
         color: white;
-        /*    z-index: 2;*/
     }
+
+    resize: horizontal;
+    overflow: auto;
 }
 

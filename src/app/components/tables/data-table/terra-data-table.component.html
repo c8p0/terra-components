@@ -7,7 +7,6 @@
              [inputRequestPending]="inputService?.requestPending"
              (outputDoPaging)="doPaging()">
 </terra-pager>
-
 <div class="table-responsive">
     <context-menu [links]="inputContextMenu"></context-menu>
     <table class="table data-table" *ngIf="dataAvailableOrRequestPending">
@@ -26,17 +25,19 @@
                     [ngStyle]="{ 'text-align': getTextAlign(header) }"
                     [class.sortable]="isSortable(header)"
                     (click)="columnHeaderClicked.emit(header)">
+                    <div class ="pusher">
                     <div>
                         <span [container]="'body'"
                               [placement]="checkTooltipPlacement(header.tooltipPlacement)"
                               [tooltip]="header.tooltipText"
                               [isDisabled]="!header.tooltipText || header.tooltipText.length == 0">
                               {{header.caption}}
-                            <span
+                                <span
                                     [ngClass]="{'icon-table_sort': isUnsorted(header),'icon-sort_asc': isSortedAsc(header),'icon-sort_desc': isSortedDesc(header)}">
                             </span>
                         </span>
-                        <span class="separator"></span>
+                            <!--<span class="separator"></span>-->
+                    </div>
                     </div>
                 </th>
             </ng-template>

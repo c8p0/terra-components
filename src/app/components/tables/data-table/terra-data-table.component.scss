@@ -173,7 +173,7 @@ terra-pager
 
 th:hover
 {
-    .separator
+/*    .separator
     {
         position: relative;
         height: 20px !important;
@@ -193,5 +193,28 @@ th:hover
         border-color: #24B3E0;
         color: #24B3E0;
         cursor: col-resize;
+    }*/
+
+    .pusher
+    {
+        position: relative;
+        -webkit-user-drag: auto;
+    }
+
+    .pusher::before
+    {
+        pointer-events: none;
+        content: "|";
+        font-size: 10px;
+        position: absolute;
+        height: 25px;
+        width: 20px;
+        right: -8px;
+        top: 1px;
+        text-align: center;
+        background-color: black;
+        color: white;
+        /*    z-index: 2;*/
     }
 }
+

@@ -56,6 +56,30 @@
                             @include font-rendering;
                         }
 
+                        .pusher
+                        {
+                            position: relative;
+                            -webkit-user-drag: auto;
+                        }
+
+                        .pusher::before
+                        {
+                            pointer-events: none;
+                            content: "|";
+                            font-size: 10px;
+                            position: absolute;
+                            height: 25px;
+                            width: 30px;
+                            right: -8px;
+                            top: 3px;
+                            text-align: center;
+                            background-color: #636671;
+                            color: #636671;
+                        }
+
+                        resize: horizontal;
+                        overflow: auto;
+
 
                     }
                 }
@@ -192,29 +216,5 @@ th:hover
         color: #24B3E0;
         cursor: col-resize;
     }
-
-    .pusher
-    {
-        position: relative;
-        -webkit-user-drag: auto;
-    }
-
-    .pusher::before
-    {
-        pointer-events: none;
-        content: "|";
-        font-size: 10px;
-        position: absolute;
-        height: 25px;
-        width: 30px;
-        right: -8px;
-        top: 3px;
-        text-align: center;
-        background-color: #636671;
-        color: #636671;
-    }
-
-    resize: horizontal;
-    overflow: auto;
 }
 

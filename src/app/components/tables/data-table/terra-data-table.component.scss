@@ -43,6 +43,8 @@
                         transition: padding var(--transition-lg);
                         white-space: nowrap;
                         width: auto;
+                        resize: horizontal;
+                        overflow: no-display;
 
                         &.sortable
                         {
@@ -168,7 +170,6 @@ terra-pager
 
 th:hover
 {
-    resize: horizontal;
     overflow: auto;
 
     .pusher

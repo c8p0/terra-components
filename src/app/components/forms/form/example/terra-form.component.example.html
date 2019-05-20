@@ -1,0 +1,9 @@
+<terra-portlet *ngFor="let widget of (widgets$ | async); index as i">
+    <h1>{{widget.identifier}}</h1>
+    <terra-form
+        [inputControlTypeMap]="formTypeMap"
+        [inputFormFields]="widget.settings"
+        [(ngModel)]="formValues[i]">
+    </terra-form>
+    {{formValues[i] | json}}
+</terra-portlet>

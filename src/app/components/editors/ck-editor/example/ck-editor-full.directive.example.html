@@ -1,2 +1,4 @@
-<ckeditor tcCkFull [config]="config"></ckeditor>
+<ckeditor tcCkFull [config]="config" [(ngModel)]="html"></ckeditor>
 <ckeditor tcCkFull [config]="tiny"></ckeditor>
+
+<div [innerHTML]="html | keepHtml"></div>

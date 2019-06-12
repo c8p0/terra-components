@@ -156,3 +156,83 @@ export const ckEditorMinimumConfig:{} =
                        'Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,BidiLtr,BidiRtl,Language,Anchor,Flash,' +
                        'Table,HorizontalRule,Smiley,SpecialChar,Iframe,PageBreak,ShowBlocks,About,Styles,Font,FontSize'
     };
+
+// video embedding test config
+export const ckEditorWithVideoEmbeddingConfig:{} =
+    {
+        toolbarGroups: [
+            {
+                name:   'styles',
+                groups: ['styles']
+            },
+            {
+                name:   'colors',
+                groups: ['colors']
+            },
+            {
+                name:   'basicstyles',
+                groups: ['basicstyles',
+                         'cleanup']
+            },
+            {
+                name:   'paragraph',
+                groups: ['align',
+                         'list',
+                         'indent',
+                         'blocks',
+                         'bidi',
+                         'paragraph']
+            },
+            {
+                name:   'clipboard',
+                groups: ['clipboard',
+                         'undo']
+            },
+            {
+                name:   'document',
+                groups: ['mode',
+                         'document',
+                         'doctools']
+            },
+            {
+                name:   'editing',
+                groups: ['find',
+                         'selection',
+                         'spellchecker',
+                         'editing']
+            },
+            {
+                name:   'forms',
+                groups: ['forms']
+            },
+            {
+                name:   'links',
+                groups: ['links']
+            },
+            {
+                name:   'insert',
+                groups: ['insert']
+            },
+            {
+                name:   'tools',
+                groups: ['tools']
+            },
+            {
+                name:   'others',
+                groups: ['others']
+            },
+            {
+                name:   'about',
+                groups: ['about']
+            }
+        ],
+        extraPlugins:  ['embed',
+                        'autoembed',
+                        'image2'],
+        embed_provider: '//ckeditor.iframe.ly/api/oembed?url={url}&callback={callback}',
+        image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
+        image2_disableResizer: true,
+        removeButtons: 'CopyFormatting,Subscript,Superscript,Outdent,Indent,Blockquote,CreateDiv,BidiLtr,BidiRtl,Language,Cut,Copy,PasteText,' +
+                       'Paste,Save,Preview,Print,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,' +
+                       'Flash,Smiley,PageBreak'
+    };

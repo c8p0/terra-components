@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {
     ckEditorFullConfig,
-    ckEditorMinimumConfig
+    ckEditorMinimumConfig,
+    ckEditorWithVideoEmbeddingConfig
 } from '../presets/ck-editor-presets';
 import {
     DomSanitizer,
@@ -17,6 +18,7 @@ export class CkEditorFullDirectiveExample
 {
     protected config:{} = ckEditorFullConfig;
     protected tiny:{} = ckEditorMinimumConfig;
+    protected video:{} = ckEditorWithVideoEmbeddingConfig;
 
     protected html:any;
 

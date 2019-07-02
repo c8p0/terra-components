@@ -3,6 +3,7 @@ import {
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     SimpleChanges
@@ -12,8 +13,9 @@ import { TerraFormFieldControlService } from './service/terra-form-field-control
 import { TerraFormFieldBase } from './data/terra-form-field-base';
 import { TerraDynamicFormFunctionsHandler } from './handler/terra-dynamic-form-functions.handler';
 import { TerraDynamicFormService } from './service/terra-dynamic-form.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Language } from 'angular-l10n';
 
 export enum TerraHtmlMethods
 {
@@ -37,9 +39,9 @@ export interface TerraDynamicFormRequestParams
     selector:  'terra-dynamic-form',
     template:  require('./terra-dynamic-form.component.html'),
     styles:    [require('./terra-dynamic-form.component.scss')],
-    providers: [TerraDynamicFormService]
+    providers: [TerraFormFieldControlService]
 })
-export class TerraDynamicFormComponent implements OnInit, OnChanges
+export class TerraDynamicFormComponent implements OnInit, OnChanges, OnDestroy
 {
     @Input()
     public inputFormFunctions:TerraDynamicFormFunctionsHandler<any>;
@@ -74,10 +76,12 @@ export class TerraDynamicFormComponent implements OnInit, OnChanges
     @Output()
     public inputShowDeprecatedEntriesChange:EventEmitter<boolean> = new EventEmitter();
 
+    @Language()
+    protected lang:string;
 
     constructor(protected formFieldControlService:TerraFormFieldControlService)
     {
-        this.inputPortletStyle = 'col-xs-12 col-md-8 col-lg-5';
+        this.inputPortletStyle = 'col-12 col-md-8 col-lg-5';
         this.inputRequestParams = {
             route:      '',
             htmlMethod: null,
@@ -118,6 +122,11 @@ export class TerraDynamicFormComponent implements OnInit, OnChanges
         }
     }
 
+    public ngOnDestroy():void
+    {
+        // implementation is required by angular-l10n. See https://robisim74.github.io/angular-l10n/spec/getting-the-translation/#messages
+    }
+
     protected validate():void
     {
         if(this.formFieldControlService.dynamicFormGroup.valid)
@@ -134,6 +143,12 @@ export class TerraDynamicFormComponent implements OnInit, OnChanges
     protected onResetClick():void
     {
         this.formFieldControlService.resetForm();
+    }
+
+    protected onToggleClick():void
+    {
+        this.inputShowDeprecatedEntries = !this.inputShowDeprecatedEntries;
+        this.inputShowDeprecatedEntriesChange.emit(this.inputShowDeprecatedEntries);
     }
 
     private registerValueChange():void
@@ -156,11 +171,5 @@ export class TerraDynamicFormComponent implements OnInit, OnChanges
                 this.inputFormFunctions.onValueChangedCallback(value);
             });
         }
-    }
-
-    protected onToggleClick():void
-    {
-        this.inputShowDeprecatedEntries = !this.inputShowDeprecatedEntries;
-        this.inputShowDeprecatedEntriesChange.emit(this.inputShowDeprecatedEntries);
     }
 }

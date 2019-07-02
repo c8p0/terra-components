@@ -3,10 +3,7 @@ import {
     OnInit
 } from '@angular/core';
 import { TerraLeafInterface } from '../leaf/terra-leaf.interface';
-import {
-    isNull,
-    isNullOrUndefined
-} from 'util';
+import { isNullOrUndefined } from 'util';
 
 /**
  * @author mkunze
@@ -44,6 +41,30 @@ export class TerraBaseTreeComponent implements OnInit
         }
     }
 
+    public getSelectedLeaf():TerraLeafInterface
+    {
+        return this.recursiveSearchActiveLeaf(this.inputLeafList);
+    }
+
+    protected onLeafClick(clickedLeaf:TerraLeafInterface):void
+    {
+        if(!isNullOrUndefined(clickedLeaf.subLeafList) && !clickedLeaf.avoidOpenOnClick)
+        {
+            this.toggleOpen(clickedLeaf);
+        }
+
+        if(!isNullOrUndefined(clickedLeaf.clickFunction) && !clickedLeaf.isActive)
+        {
+            clickedLeaf.clickFunction();
+        }
+
+        if(!clickedLeaf.isActive)
+        {
+            this.recursiveLeafListInactive(this.inputCompleteLeafList);
+            clickedLeaf.isActive = true;
+        }
+    }
+
     private iterateOverParents(parents:Array<TerraLeafInterface>):void
     {
         for(let parentLeaf of parents)
@@ -71,25 +92,6 @@ export class TerraBaseTreeComponent implements OnInit
             {
                 leaf.parentLeafList = this.inputParentLeafList;
             }
-        }
-    }
-
-    protected onLeafClick(clickedLeaf:TerraLeafInterface):void
-    {
-        if(!isNullOrUndefined(clickedLeaf.subLeafList) && !clickedLeaf.avoidOpenOnClick)
-        {
-            this.toggleOpen(clickedLeaf);
-        }
-
-        if(!isNullOrUndefined(clickedLeaf.clickFunction) && !clickedLeaf.isActive)
-        {
-            clickedLeaf.clickFunction();
-        }
-
-        if(!clickedLeaf.isActive)
-        {
-            this.recursiveLeafListInactive(this.inputCompleteLeafList);
-            clickedLeaf.isActive = true;
         }
     }
 
@@ -147,10 +149,5 @@ export class TerraBaseTreeComponent implements OnInit
         }
 
         return foundLeaf;
-    }
-
-    public getSelectedLeaf():TerraLeafInterface
-    {
-        return this.recursiveSearchActiveLeaf(this.inputLeafList);
     }
 }

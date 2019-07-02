@@ -7,13 +7,14 @@
     [inputIsSmall]="inputIsSmall"
     [inputIsLarge]="inputIsLarge"
     (click)="toggle()"
-    container="body">
+    container="body"
+    [adaptivePosition]="false">
     
     <div btn-inner class="toggle-wrapper"
          [ngClass]="{'active':isActive,
                 'sm': inputIsSmall,
                 'lg': inputIsLarge,
-                'pull-xs-right': inputIsAlignRight,
+                'float-right': inputIsAlignRight,
                 'disabled': inputIsDisabled
                 }">
         <div class="slider"></div>

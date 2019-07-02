@@ -39,6 +39,7 @@
 	"terraFileInput": {
 		"choose": "Wählen",
 		"cancel": "Abbrechen",
+		"reset": "Zurücksetzen",
 		"chooseFile": "Datei wählen"
 	},
 	"terraSuggestionBox": {
@@ -117,8 +118,13 @@
 		"pause": "Pause",
 		"reset": "Zurücksetzen"
 	},
-	"filter": {
+	"tcFilter": {
 		"search": "Suchen",
 		"reset": "Zurücksetzen"
+	},
+	"errorInterceptor": {
+		"unauthorized": "Nicht autorisiert",
+		"missingPermissions": "Fehlende Berechtigungen für:",
+		"forbidden": "Keine Berechtigung"
 	}
 }

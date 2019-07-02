@@ -156,3 +156,8 @@ export * from './app/components/tables/data-table/terra-data-table-base.service'
 export * from './app/components/tables/data-table/table-row/table-row.component';
 export * from './app/components/alert/alert.service';
 export * from './app/helpers/activated-route.helper';
+export * from './app/service/model-cache';
+export * from './app/http-interceptors';
+export * from './app/components/editors/ck-editor/presets/ck-editor-minimum-preset';
+export * from './app/components/editors/ck-editor/presets/ck-editor-full-preset';
+export * from './app/components/editors/ck-editor/ck-editor.directive';

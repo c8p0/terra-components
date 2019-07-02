@@ -1,8 +1,8 @@
 import {
+    APP_INITIALIZER,
     Compiler,
     COMPILER_OPTIONS,
     CompilerFactory,
-    ModuleWithProviders,
     NgModule
 } from '@angular/core';
 import {
@@ -19,7 +19,7 @@ import {
 } from 'ngx-bootstrap';
 import {
     L10nLoader,
-    TranslationModule
+    LocalizationModule
 } from 'angular-l10n';
 import { QuillModule } from 'ngx-quill';
 import { TerraComponentsComponent } from './terra-components.component';
@@ -32,25 +32,22 @@ import { TerraInteractModule } from './components/interactables/interact.module'
 import { l10nConfig } from './translation/l10n.config';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { Type } from '@angular/core/src/type';
 import {
     components,
     exportedComponents
 } from './components/component-collection';
 import { examples } from './components/example-collection';
-import { services } from './service/service-collection';
 import { directives } from './components/directive-collection';
-import { TerraLoadingSpinnerService } from './components/loading-spinner/service/terra-loading-spinner.service';
-import { AlertService } from './components/alert/alert.service';
-import {
-    MatInputModule,
-    MatSlideToggleModule,
-    MatTabsModule
-} from '@angular/material';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 function createCompiler(compilerFactory:CompilerFactory):Compiler
 {
     return compilerFactory.createCompiler();
+}
+
+function initL10n(l10nLoader:L10nLoader):Function
+{
+    return ():Promise<void> => l10nLoader.load();
 }
 
 @NgModule({
@@ -60,7 +57,10 @@ function createCompiler(compilerFactory:CompilerFactory):Compiler
         ...directives,
         ...examples
     ],
-    entryComponents: exportedComponents,
+    entryComponents: [
+        ...exportedComponents,
+        ...examples
+    ],
     exports:         [
         ...exportedComponents,
         ...directives,
@@ -72,13 +72,14 @@ function createCompiler(compilerFactory:CompilerFactory):Compiler
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        ModalModule.forRoot(),
         HttpModule,
         HttpClientModule,
+        LocalizationModule.forRoot(l10nConfig),
+        CKEditorModule,
+        ModalModule.forRoot(),
         TooltipModule.forRoot(),
         AlertModule.forRoot(),
         ButtonsModule.forRoot(),
-        TranslationModule.forRoot(l10nConfig),
         MyDatePickerModule,
         AceEditorModule,
         TerraInteractModule,
@@ -88,9 +89,8 @@ function createCompiler(compilerFactory:CompilerFactory):Compiler
         MatInputModule,
         MatSlideToggleModule
     ],
+    // TODO: Those providers are also available in terra. Find a way they are not, since their only purpose is to be able to start the sandbox app.
     providers:       [
-        TerraLoadingSpinnerService,
-        AlertService,
         {
             provide:  COMPILER_OPTIONS,
             useValue: {},
@@ -100,6 +100,12 @@ function createCompiler(compilerFactory:CompilerFactory):Compiler
             provide:  CompilerFactory,
             useClass: JitCompilerFactory,
             deps:     [COMPILER_OPTIONS]
+        },
+        {
+            provide:    APP_INITIALIZER, // APP_INITIALIZER will execute the function when the app is initialized and delay what it provides.
+            useFactory: initL10n,
+            deps:       [L10nLoader],
+            multi:      true
         },
         {
             provide:    Compiler,
@@ -113,22 +119,4 @@ function createCompiler(compilerFactory:CompilerFactory):Compiler
 })
 
 export class TerraComponentsModule
-{
-    constructor(public l10nLoader:L10nLoader)
-    {
-        this.l10nLoader.load();
-    }
-
-    public static forRoot():ModuleWithProviders
-    {
-        return {
-            ngModule:  TerraComponentsModule,
-            providers: services
-        };
-    }
-
-    public static forChild():Type<any>
-    {
-        return TerraComponentsModule;
-    }
-}
+{}

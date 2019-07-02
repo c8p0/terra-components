@@ -13,6 +13,7 @@
             <th *ngFor="let header of inputHeaderList"
                 width="{{header.width}}"
                 [container]="'body'"
+                [adaptivePosition]="false"
                 [placement]="checkTooltipPlacement(header.tooltipPlacement)"
                 [tooltip]="header.tooltipText"
                 [isDisabled]="!header.tooltipText || header.tooltipText.length == 0"
@@ -39,6 +40,7 @@
                     <div [innerHTML]="cell.tooltipText"></div>
                 </ng-template>
                 <td [container]="'body'"
+                    [adaptivePosition]="false"
                     width="{{ inputHeaderList[i].width }}"
                     [placement]="checkTooltipPlacement(cell.tooltipPlacement)"
                     [tooltip]="tdTooltip"
@@ -46,7 +48,7 @@
                     [isDisabled]="!cell.tooltipText || cell.tooltipText.length == 0">
                     <span [ngClass]="cell.icon"></span>
                     <span [innerHTML]="cell.caption"></span>
-                    <div class="btn-group" *ngIf="cell.buttonList" [ngClass]="{'pull-xs-right': cell.buttonListAlignRight}">
+                    <div class="btn-group" *ngIf="cell.buttonList" [ngClass]="{'float-right': cell.buttonListAlignRight}">
                         <ng-container *ngFor="let button of cell.buttonList">
                             <terra-button *ngIf="!button.isHidden"
                                           (outputClicked)="button.clickFunction($event)"

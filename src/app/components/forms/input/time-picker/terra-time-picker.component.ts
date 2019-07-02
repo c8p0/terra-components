@@ -5,6 +5,7 @@ import {
     Component,
     forwardRef,
     Input,
+    OnDestroy,
     OnInit,
 } from '@angular/core';
 import {
@@ -13,6 +14,8 @@ import {
 } from '@angular/forms';
 import { TerraSelectBoxValueInterface } from '../../select-box/data/terra-select-box.interface';
 import { isNullOrUndefined } from 'util';
+import { noop } from 'rxjs';
+import { Language } from 'angular-l10n';
 
 @Component({
     selector:  'terra-time-picker',
@@ -28,7 +31,7 @@ import { isNullOrUndefined } from 'util';
         }
     ]
 })
-export class TerraTimePickerComponent implements OnInit, ControlValueAccessor
+export class TerraTimePickerComponent implements OnInit, ControlValueAccessor, OnDestroy
 {
     /**
      * @description If true, the input will be disabled. Default false.
@@ -37,8 +40,14 @@ export class TerraTimePickerComponent implements OnInit, ControlValueAccessor
 
     public valuesHours:Array<TerraSelectBoxValueInterface>;
     public valuesMinutes:Array<TerraSelectBoxValueInterface>;
+
+    @Language()
+    protected lang:string;
+
     private value:Date;
 
+    private onTouchedCallback:() => void = noop;
+    private onChangeCallback:(_:any) => void = noop;
 
     constructor()
     {
@@ -51,6 +60,11 @@ export class TerraTimePickerComponent implements OnInit, ControlValueAccessor
     public ngOnInit():void
     {
         this.createTimeValues();
+    }
+
+    public ngOnDestroy():void
+    {
+        // implementation is required by angular-l10n. See https://robisim74.github.io/angular-l10n/spec/getting-the-translation/#messages
     }
 
     public createTimeValues():void
@@ -79,10 +93,6 @@ export class TerraTimePickerComponent implements OnInit, ControlValueAccessor
         }
 
     }
-
-    private onTouchedCallback:() => void = ():void => undefined;
-
-    private onChangeCallback:(_:any) => void = (_:any):void => undefined;
 
     public registerOnChange(fn:any):void
     {

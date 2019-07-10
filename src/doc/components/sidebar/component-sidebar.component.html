@@ -1,15 +1,10 @@
 <div class="sidebar_wrapper">
     <div class="sidebar">
         <p class="h4">Components</p>
-        <ul class="component_list" *ngFor="let group of groupArray">
-            <div class="group-header">
-                <hr>
-                <span class="group-name">{{group[0]}}</span>
-            </div>
-            <li *ngFor="let component of group[1]"
-                routerLinkActive="is-active"
-                routerLink="{{component.component}}">
-                <a>{{component.component}}</a>
+        <ul class="component_list">
+            <li *ngFor="let component of examples"
+                [routerLink]="[component.name]">
+                <a>{{component.name}}</a>
 <!--                <ul class="nav-ul">-->
 <!--                    <li *ngIf="sidebarDataProvider.htmlFilledState" (click)="_scrollToViewHelper.scrollToId('example')">Example</li>-->
 <!--                    <li *ngIf="sidebarDataProvider.htmlFilledState"(click)="_scrollToViewHelper.scrollToId('htmlcode')">Html</li>-->

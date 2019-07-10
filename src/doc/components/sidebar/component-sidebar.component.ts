@@ -1,7 +1,9 @@
 import {
     Component,
-    OnInit
+    OnInit,
+    Type
 } from '@angular/core';
+import { examples } from '../../../lib/components/example-collection';
 
 @Component(
     {
@@ -13,6 +15,8 @@ export class ComponentSidebarComponent implements OnInit
 {
     private groupArray:Array<any> = [];
     private jsonMetaData:Array<any> = [];
+
+    protected examples:Array<Type<any>> = examples;
 
     constructor()
     {

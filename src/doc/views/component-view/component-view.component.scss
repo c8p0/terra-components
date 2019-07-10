@@ -1,0 +1,78 @@
+.main_view
+{
+    .scroll-fix
+    {
+        height: 50px;
+    }
+    margin-left: 10%;
+    margin-right: 10%;
+    font-size: 15px !important;
+    
+    ::-webkit-scrollbar
+    {
+        background-color: #2B2B2B;
+        width: 10px;
+        
+    }
+    ::-webkit-scrollbar-thumb
+    {
+        background: #C1C1C1;
+        border-radius: 5px;
+    }
+    
+    .h4
+    {
+        line-height: 45px;
+    }
+    .main_header
+    {
+        color: rgb(77, 78, 83);
+        font-weight: 100;
+        margin-top: 20px;
+        text-transform: capitalize;
+    }
+    .example-header
+    {
+        margin-bottom: 5px;
+    }
+    .example-gray
+    {
+        background-color: #E9EAEC !important;
+    }
+    .example_container
+    {
+        margin-bottom: 20px;
+        border-radius: 3px;
+        padding:20px;
+        min-height: 100px;
+    }
+    .code_container
+    {
+        overflow-x: hidden;
+        font-size: inherit !important;
+        .code_header
+        {
+            height: 45px;
+            .copy_to_clip_button
+            {
+                float: right;
+                line-height: 45px;
+            }
+        }
+        .code_section
+        {
+            max-height: 400px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    }
+    .copyAlert
+    {
+        top: 0;
+        right: 0;
+        position: fixed;
+    }
+   
+}
+
+

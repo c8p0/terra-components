@@ -1,0 +1,70 @@
+<div class="main_view">
+    
+    <h1 class="main_header">{{_componentName}}</h1>
+    <hr>
+    <div *ngIf="_overviewMarkDownPath">
+        <markdown [src]="_overviewMarkDownPath"></markdown>
+    </div>
+    <div *ngIf="htmlFilledState">
+        <div class="scroll-fix" id="example"></div>
+        <div class="example-header">
+            <span class="h4">Example</span>
+        </div>
+        <div class="example_container" [ngClass]="{'example-gray': bgColorGray}">
+            <div #viewChildTarget></div>
+<!--            <div *ngComponentOutlet="component"></div>-->
+        </div>
+    </div>
+    <div class="code_container" *ngIf="htmlFilledState">
+        <div class="scroll-fix" id="htmlcode" ></div>
+        <div class="code_header">
+            <span class="h4">Html</span>
+            <terra-button
+                class="copy_to_clip_button"
+                (click)="copyText(_htmlToCopy)"
+                inputIcon="icon-copy_clipboard">
+            </terra-button>
+        </div>
+        <div>
+            <section class="code_section" [innerHTML]="_highlightedHtmlCode" highlight-js-content=".highlight"></section>
+        </div>
+        <div *ngIf="cssFilledState">
+            <div class="scroll-fix" id="scsscode" ></div>
+            <div class="code_header">
+                <span class="h4">Scss</span>
+                <terra-button
+                    class="copy_to_clip_button"
+                    (click)="copyText(_cssToCopy)"
+                    inputIcon="icon-copy_clipboard">
+                </terra-button>
+            </div>
+    
+            <div>
+                <section class="code_section" [innerHTML]="_highlightedCssCode" highlight-js-content=".highlight"></section>
+            </div>
+        </div>
+        <div class="scroll-fix" id="typescriptcode"></div>
+        <div class="code_header">
+            <span class="h4">Typescript</span>
+            <terra-button
+                class="copy_to_clip_button"
+                (click)="copyText(_tsToCopy)"
+                inputIcon="icon-copy_clipboard">
+            </terra-button>
+        </div>
+        
+        <div>
+            <section class="code_section" [innerHTML]="_highlightedTsCode" highlight-js-content=".highlight"></section>
+        </div>
+    </div>
+    <div class="scroll-fix" id="api"></div>
+    <span class="h4">API</span>
+    <hr>
+    <div class="api_container">
+        <div [innerHTML]="_apiCode"></div>
+    </div>
+    <terra-alert-panel class="copyAlert"></terra-alert-panel>
+</div>
+
+
+

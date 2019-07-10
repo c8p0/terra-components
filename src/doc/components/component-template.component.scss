@@ -1,0 +1,10 @@
+.component-view
+{
+    height: 100vh;
+    overflow-y: scroll;
+    @media (max-width: 767.98px)
+    {
+        height: auto;
+        overflow: auto;
+    }
+}

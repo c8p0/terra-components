@@ -20,6 +20,7 @@ import { LocalizationModule } from 'angular-l10n';
 import { BrowserModule } from '@angular/platform-browser';
 import { ComponentViewV2Component } from './views/component-view-v2/component-view-v2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TabsModule } from 'ngx-bootstrap';
 
 const routes:Routes = [
     {
@@ -55,7 +56,8 @@ const routes:Routes = [
         LocalizationModule.forRoot({}),
         TerraComponentsModule,
         TerraComponentsExamplesModule,
-        MarkdownModule.forRoot({loader: HttpClient})
+        MarkdownModule.forRoot({loader: HttpClient}),
+        TabsModule.forRoot()
     ],
     bootstrap:    [DocComponent]
 })

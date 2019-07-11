@@ -1,1 +1,14 @@
-<ng-container *ngComponentOutlet="component$ | async"></ng-container>
+
+<h1> Example </h1>
+<ng-container *ngIf="component$ | async as component">
+    <tabset #tabs>
+        <tab heading="Preview" id="tab1">
+            <ng-container *ngComponentOutlet="component.class"></ng-container>
+        </tab>
+        <tab heading="Template">{{component.metadata.template}}</tab>
+        <tab heading="Styles">{{component.metadata.styles}}</tab>
+    </tabset>
+</ng-container>
+
+<br>
+<h1> API </h1>

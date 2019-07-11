@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 import { examples } from '../../../lib/components/example-collection';
 import { Observable } from 'rxjs';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { TerraButtonInterface } from '../../../lib';
 
 @Component({
     selector:    'tc-component-view-v2',
@@ -21,11 +22,13 @@ import { TabsetComponent } from 'ngx-bootstrap';
 export class ComponentViewV2Component implements OnInit
 {
     protected component$:Observable<{ class:Type<any>, metadata:Component }>;
+    protected readonly sourceToggle:Array<TerraButtonInterface> = [{
+        icon: 'icon-placeholder_show_list',
+        clickFunction: ():void => this.toggleSources()
+    }];
 
+    private source:boolean = false;
     private readonly annotations:string = '__annotations__';
-
-    @ViewChild('tabs')
-    private tabs:TabsetComponent;
 
     constructor(private route:ActivatedRoute)
     {}
@@ -35,7 +38,7 @@ export class ComponentViewV2Component implements OnInit
         this.component$ = this.route.params.pipe(
             map((params:Params) =>
             {
-                this.selectTab(0);
+                this.source = false;
                 const component:Type<any> = examples.find((example:Type<any>) =>
                 {
                     return example.name.toLowerCase().startsWith(params['componentName'].toLowerCase());
@@ -49,12 +52,9 @@ export class ComponentViewV2Component implements OnInit
         );
     }
 
-    protected selectTab(tabId:number):void
+    private toggleSources():void
     {
-        if(this.tabs)
-        {
-            this.tabs.tabs[tabId].active = true;
-        }
+        this.source = !this.source;
     }
 
 }

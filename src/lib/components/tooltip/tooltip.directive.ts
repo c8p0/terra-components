@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 
 import tippy, { Placement } from 'tippy.js';
-import { isNullOrUndefined } from 'util';
 import { TerraPlacementEnum } from '../../helpers/enums/terra-placement.enum';
 
 @Directive({
@@ -43,7 +42,10 @@ export class TooltipDirective implements OnDestroy, OnChanges
     @Input()
     public set placement(placement:string)
     {
-        console.warn('`placement` is deprecated since v4. The placement is calculated automatically now.');
+        if(process.env.ENV === 'development')
+        {
+            console.warn('`placement` is deprecated since v4. The placement is calculated automatically now.');
+        }
 
         if(!placement)
         {

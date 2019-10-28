@@ -71,6 +71,6 @@
 				"flatted": "Flatted"
 			}
 		},
-		"dest": "../../dist"
+		"dest": "../../dist/lib"
 	}
 }

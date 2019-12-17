@@ -1,3 +1,23 @@
+<a name="5.0.0"></a>
+# 5.0.0 (Unreleased)
+
+### Features
+* **space-variables** Added new space variables that are not affected by compact-mode, like var(--space-md-fix)
+* **mat-date-picker** styles for the [angular material datepicker](https://material.angular.io/components/datepicker/overview).
+* **matInput** updated styles to match `mat-date-picker`, `mat-select` and `matInput` appearance.
+
+### Breaking Changes
+* **build** Terra-Components is now fully AOT compatible. 
+Terra-Components now complies with the angular package format and code autocompletion should work fine in your angular app.
+* **styles** Style files such as styles/styles.scss, styles/icons.scss and styles/theme-loader.scss are now .css files rather than .scss files.
+* **dependencies** Every dependency of Terra-Components now is a peer dependency. You need to install these dependencies in your project.
+* **terra-data-table** removed deprecated input `isSticky` sticky. No replacement will be provided for now. 
+* **float-thead** removed the directive. No replacement will be provided for now.
+* **terra-date-picker** deprecated. Use [angular material datepicker](https://material.angular.io/components/datepicker/overview) instead.
+
+### Fix
+* **terra-base-editor** removed unnecessary quill style import
+
 <a name="4.8.0"></a>
 # 4.8.0 (Unreleased)
 
@@ -26,6 +46,7 @@
 
 ### Bug Fixes
 * **terra-button-with-options** `isHidden` option is now interpreted correctly.
+* **inputs** Tabindex of labels set to -1 to avoid tab focus in a form.
 * **file-browser** Restrict number of parallel uploads
 * **terra-date-picker** Fixed style of placeholder.
 
@@ -39,7 +60,6 @@
 
 ### Bug Fixes
 * **radio-group** Adjusted height of `<legend>` and only is rendered when content is available.
-* **inputs** Tabindex of labels set to -1 to avoid tab focus in a form.
 
 <a name="4.5.0"></a>
 # 4.5.0 (09.10.2019)

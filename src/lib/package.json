@@ -36,7 +36,7 @@
 		"interactjs": "1.3.4",
 		"lodash.clonedeep": "^4.5.0",
 		"moment": "^2.24.0",
-		"mydatepicker": "^2.6.6",
+		"angular-mydatepicker": "^0.6.0",
 		"ngx-bootstrap": "^4.3.0",
 		"ngx-quill": "^5.2.0",
 		"path": "^0.12.7",

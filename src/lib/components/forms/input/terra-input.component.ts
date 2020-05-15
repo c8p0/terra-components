@@ -1,4 +1,7 @@
-import { Input } from '@angular/core';
+import {
+    Directive,
+    Input
+} from '@angular/core';
 import {
     ControlValueAccessor,
     FormControl
@@ -8,6 +11,7 @@ import { isNullOrUndefined } from 'util';
 import { TerraPlacementEnum } from '../../../helpers/enums/terra-placement.enum';
 import { noop } from 'rxjs';
 
+@Directive()
 export class TerraInputComponent implements ControlValueAccessor
 {
     /**

@@ -3,6 +3,7 @@ import {
     ComponentFactory,
     ComponentFactoryResolver,
     ComponentRef,
+    Directive,
     Input,
     OnChanges,
     OnDestroy,
@@ -15,6 +16,7 @@ import { FormEntryContainerDirective } from './form-entry-container.directive';
 import { TerraFormFieldInterface } from '../model/terra-form-field.interface';
 import { TerraTextInputComponent } from '../../input/text-input/terra-text-input.component';
 
+@Directive()
 export class TerraFormEntryBase implements OnChanges, OnDestroy
 {
     /**
@@ -40,18 +42,20 @@ export class TerraFormEntryBase implements OnChanges, OnDestroy
     @Input()
     public inputIsDisabled:boolean = false;
 
-    @ViewChild(FormEntryContainerDirective, { static: true })
+    @ViewChild(FormEntryContainerDirective, {static: true})
     protected _container:FormEntryContainerDirective;
 
     protected _componentFactory:ComponentFactory<any>;
     protected _componentRef:ComponentRef<any>;
+
     protected get _componentInstance():any
     {
         return (!this._componentRef) ? null : this._componentRef.instance;
     }
 
     constructor(protected _componentFactoryResolver:ComponentFactoryResolver)
-    {}
+    {
+    }
 
     /**
      * Implementation of the OnChanges life cycle hook.
@@ -81,11 +85,11 @@ export class TerraFormEntryBase implements OnChanges, OnDestroy
         {
             if(this.inputControlTypeMap[this.inputFormField.type] instanceof Type)
             {
-                return <Type<any>> this.inputControlTypeMap[this.inputFormField.type];
+                return <Type<any>>this.inputControlTypeMap[this.inputFormField.type];
             }
             else
             {
-                return (<TerraFormTypeInterface> this.inputControlTypeMap[this.inputFormField.type]).component;
+                return (<TerraFormTypeInterface>this.inputControlTypeMap[this.inputFormField.type]).component;
             }
         }
 
@@ -108,7 +112,7 @@ export class TerraFormEntryBase implements OnChanges, OnDestroy
             let inputMap:{ [key:string]:string } = {};
             if(!(this.inputControlTypeMap[this.inputFormField.type] instanceof Type))
             {
-                inputMap = (<TerraFormTypeInterface> this.inputControlTypeMap[this.inputFormField.type]).inputMap;
+                inputMap = (<TerraFormTypeInterface>this.inputControlTypeMap[this.inputFormField.type]).inputMap;
             }
 
             if(!isNullOrUndefined(this.inputFormField.options))

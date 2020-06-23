@@ -1,10 +1,8 @@
 import { TerraDataTableRowInterface } from './data-table/interfaces/terra-data-table-row.interface';
-import {
-    EventEmitter,
-    Output
-} from '@angular/core';
+import { EventEmitter, Output, Directive } from '@angular/core';
 import { isNullOrUndefined } from 'util';
 
+@Directive()
 export class TerraBaseTable<T>
 {
     /**

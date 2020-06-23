@@ -1,13 +1,11 @@
-import {
-    Input,
-    OnInit
-} from '@angular/core';
+import { Input, OnInit, Directive } from '@angular/core';
 import { TerraLeafInterface } from '../leaf/terra-leaf.interface';
 import { isNullOrUndefined } from 'util';
 
 /**
  * @author mkunze
  */
+@Directive()
 export class TerraBaseTreeComponent implements OnInit
 {
     /**

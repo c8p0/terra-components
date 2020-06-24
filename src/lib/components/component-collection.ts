@@ -99,7 +99,6 @@ export const exportedComponents:Array<Type<any>> = [
     TerraTextAreaInputComponent,
     TerraCardComponent,
     TerraToggleComponent,
-    TerraSyntaxEditorComponent,
     TerraSliderComponent,
     TerraFileBrowserComponent,
     TerraFileInputComponent,

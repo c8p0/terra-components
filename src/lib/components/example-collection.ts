@@ -81,7 +81,6 @@ export const examples:Array<Type<any>> = [
     TerraFileInputComponentExample,
     TerraCheckboxTreeComponentExample,
     TerraToggleComponentExample,
-    TerraSyntaxEditorComponentExample,
     TerraSimpleTableComponentExample,
     TerraPagerComponentExample,
     TerraTaglistComponentExample,

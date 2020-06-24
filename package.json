@@ -66,11 +66,11 @@
 		"rxjs": "~6.5.4",
 		"semver": "^7.3.2",
 		"ts-node": "~7.0.0",
-		"tsickle": "^0.37.0",
+		"tsickle": "^0.38.1",
 		"tslib": "^1.10.0",
 		"tslint": "^5.17.0",
 		"tslint-eslint-rules": "^5.4.0",
-		"typescript": "~3.5.3",
+		"typescript": "~3.8.3",
 		"yargs": "^15.1.0",
 		"zone.js": "~0.9.1"
 	}

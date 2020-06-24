@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 import {
     ControlValueAccessor,
     FormControl
@@ -9,6 +9,7 @@ import { TerraPlacementEnum } from '../../../helpers/enums/terra-placement.enum'
 import { noop } from 'rxjs';
 
 /** @deprecated since v5. Use angular material's [input](https://material.angular.io/components/input) instead. */
+@Directive()
 export class TerraInputComponent implements ControlValueAccessor
 {
     /**

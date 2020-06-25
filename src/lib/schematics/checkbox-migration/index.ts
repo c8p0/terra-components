@@ -10,8 +10,9 @@ import { LoggerApi } from '@angular-devkit/core/src/logger';
 const componentPath:string = './src/app/app.component.html';
 // const componentPathTest:string = 'test.component.ts';
 
-const queryString:string = 'inputIsDisabled';
-const replaceString:string = 'disabled';
+const queryStrings:Array<{queryString:string, replaceString:string}> = [
+    {queryString: '[inputIsDisabled]', replaceString: '[disabled]'}
+];
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
@@ -35,12 +36,20 @@ async function runMigration(tree:Tree, context:SchematicContext)
         let update:UpdateRecorder = tree.beginUpdate(componentPath!);
         let buffer:Buffer | number = tree.read(componentPath) || 0;
 
-        const startIndex:number = buffer.toString().indexOf(queryString);
-
-        update.insertRight(startIndex, replaceString);
-        update.remove(startIndex, queryString.length);
+        queryStrings.forEach((query:{queryString:string, replaceString:string}) =>
+        {
+            update = replaceTemplateProperties(update, buffer, query.replaceString, query.queryString);
+        });
         tree.commitUpdate(update);
     }
 
     logger.info(`Content after update:\n${tree.read(componentPath)}`);
+}
+
+function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, replaceString:string, queryString:string):UpdateRecorder
+{
+    const startIndex:number = buffer.toString().indexOf(queryString);
+    update.insertRight(startIndex, replaceString);
+    update.remove(startIndex, queryString.length);
+    return update;
 }

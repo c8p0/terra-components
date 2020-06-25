@@ -10,8 +10,8 @@ import { LoggerApi } from '@angular-devkit/core/src/logger';
 const componentPath:string = './src/app/app.component.html';
 // const componentPathTest:string = 'test.component.ts';
 
-const queryString:string = 'Foobar!';
-const replaceString:string = 'Foo Bar!!';
+const queryString:string = 'inputIsDisabled';
+const replaceString:string = 'disabled';
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
@@ -28,7 +28,7 @@ async function runMigration(tree:Tree, context:SchematicContext)
     const logger:LoggerApi = context.logger;
     // tree.create(componentPathTest, 'console.log("Foobar!")');
 
-    logger.info(` Content before update: ${tree.read(componentPath)} `);
+    logger.info(`Content before update:\n${tree.read(componentPath)} `);
 
     if(tree.exists(componentPath))
     {
@@ -37,11 +37,10 @@ async function runMigration(tree:Tree, context:SchematicContext)
 
         const startIndex:number = buffer.toString().indexOf(queryString);
 
-        update.remove(startIndex, queryString.length);
         update.insertRight(startIndex, replaceString);
-
+        update.remove(startIndex, queryString.length);
         tree.commitUpdate(update);
     }
 
-    logger.info(` Content after update: ${tree.read('hello.component.ts')} `);
+    logger.info(`Content after update:\n${tree.read(componentPath)}`);
 }

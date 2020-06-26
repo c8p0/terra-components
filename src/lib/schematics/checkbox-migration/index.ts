@@ -11,16 +11,10 @@ import { createMigrationProgram } from '../utils/compiler-hosts';
 import * as ts from 'typescript';
 import { relative } from 'path';
 import { StringReplacementInterface } from '../string-replacement.interface';
+import { stringsToReplace } from './property-replacements';
 
 
 let logger:LoggerApi;
-
-const stringsToReplace:Array<StringReplacementInterface> = [
-    {
-        query:       '[inputIsDisabled]',
-        replacement: '[disabled]'
-    }
-];
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.

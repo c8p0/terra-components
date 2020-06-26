@@ -70,22 +70,24 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
             if(tree.exists(templateFileName))
             {
                 let buffer:Buffer | number = tree.read(templateFileName) || 0;
-                let startIndex:number = buffer.toString().indexOf('terra-checkbox');
-                let endIndex:number = buffer.toString().indexOf('/terra-checkbox');
+                let index:number = buffer.toString().indexOf('terra-checkbox');
 
-                while(startIndex >= 0)
+                while(index >= 0)
                 {
+                    let startIndex:number = index;
+                    let endIndex:number = buffer.toString().indexOf('/terra-checkbox');
                     let update:UpdateRecorder = tree.beginUpdate(templateFileName!);
+
+                    replaceTemplateProperties(update, buffer, startIndex, endIndex);
+
                     update.remove(startIndex, 'terra-checkbox'.length);
                     update.insertRight(startIndex, 'mat-checkbox');
-                    tree.commitUpdate(update);
-                    stringsToReplace.forEach((query:StringReplacementInterface) =>
-                    {
-                        replaceTemplateProperties(update, buffer, query.replacement, query.query);
-                    });
+                    update.remove(endIndex, '/terra-checkbox'.length);
+                    update.insertRight(endIndex, '/mat-checkbox');
+
                     tree.commitUpdate(update);
                     buffer = tree.read(templateFileName) || 0;
-                    startIndex = buffer.toString().indexOf('terra-checkbox');
+                    index = buffer.toString().indexOf('terra-checkbox');
                 }
             }
         }
@@ -97,9 +99,15 @@ function isComponent(fileName:string):boolean
     return fileName.endsWith('component.ts');
 }
 
-function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, replaceString:string, queryString:string):void
+function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, startIndex:number, endIndex:number):void
 {
-    const startIndex:number = buffer.toString().indexOf(queryString);
-    update.insertRight(startIndex, replaceString);
-    update.remove(startIndex, queryString.length);
+    stringsToReplace.forEach((query:StringReplacementInterface) =>
+    {
+        let queryIndex:number = buffer.toString().indexOf(query.query);
+        if(queryIndex > startIndex && queryIndex < endIndex)
+        {
+            update.remove(queryIndex, query.query.length);
+            update.insertRight(queryIndex, query.replacement);
+        }
+    });
 }

@@ -12,6 +12,7 @@
 		"prepare-release": "npm run reinstall && npm run build && npm run test-once && npm start"
 	},
 	"dependencies": {
+		"@types/parse5": "^5.0.3",
 		"bootstrap": "^4.4.1",
 		"htmlhint": "~0.10.3",
 		"iban": "^0.0.12",

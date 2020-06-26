@@ -10,6 +10,7 @@ import { getProjectTsConfigPaths } from '@angular/core/schematics/utils/project_
 import { createMigrationProgram } from '../utils/compiler-hosts';
 import * as ts from 'typescript';
 import { relative } from 'path';
+// import { StringReplacementInterface } from '../string-replacement.interface';
 
 // const componentPath:string = './src/app/app.component.html';
 //
@@ -17,6 +18,13 @@ import { relative } from 'path';
 // const replaceString:string = 'Foo Bar!!';
 
 let logger:LoggerApi;
+
+// const stringsToReplace:Array<StringReplacementInterface> = [
+//     {
+//         query:       '[inputIsDisabled]',
+//         replacement: '[disabled]'
+//     }
+// ];
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
@@ -29,7 +37,6 @@ export function checkboxMigration(_options:any):Rule
         const allPaths:Array<string> = [...buildPaths, ...testPaths];
 
         logger = context.logger;
-
 
         if(!allPaths.length)
         {
@@ -56,7 +63,6 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
     // program.getSourceFiles().forEach((sourceFile:ts.SourceFile) => {
     //     logger.info(sourceFile.fileName);
     // });
-
     // logger.info(` Content before update: ${tree.read(relative(basePath, sourceFiles[4].referencedFiles.toString()))} `);
 
     sourceFiles.forEach((sourceFile:ts.SourceFile) =>
@@ -88,3 +94,16 @@ function isComponent(fileName:string):boolean
 {
     return fileName.endsWith('component.ts');
 }
+
+// function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, replaceString:string, queryString:string):void
+// {
+//     const startIndex:number = buffer.toString().indexOf(queryString);
+//     update.insertRight(startIndex, replaceString);
+//     update.remove(startIndex, queryString.length);
+// }
+
+// stringsToReplace.forEach((query:StringReplacementInterface) =>
+// {
+//     replaceTemplateProperties(update, buffer, query.replacement, query.query);
+// });
+// tree.commitUpdate(update);

@@ -6,12 +6,13 @@ import {
 } from '@angular-devkit/schematics';
 import { from } from 'rxjs';
 import { LoggerApi } from '@angular-devkit/core/src/logger';
+import { StringReplacementInterface } from '../string-replacement.interface';
 
 const componentPath:string = './src/app/app.component.html';
 // const componentPathTest:string = 'test.component.ts';
 
-const queryStrings:Array<{queryString:string, replaceString:string}> = [
-    {queryString: '[inputIsDisabled]', replaceString: '[disabled]'}
+const stringsToReplace:Array<StringReplacementInterface> = [
+    {query: '[inputIsDisabled]', replacement: '[disabled]'}
 ];
 
 // You don't have to export the function as default. You can also have more than one rule factory
@@ -36,9 +37,9 @@ async function runMigration(tree:Tree, context:SchematicContext)
         let update:UpdateRecorder = tree.beginUpdate(componentPath!);
         let buffer:Buffer | number = tree.read(componentPath) || 0;
 
-        queryStrings.forEach((query:{queryString:string, replaceString:string}) =>
+        stringsToReplace.forEach((query:StringReplacementInterface) =>
         {
-            update = replaceTemplateProperties(update, buffer, query.replaceString, query.queryString);
+            update = replaceTemplateProperties(update, buffer, query.replacement, query.query);
         });
         tree.commitUpdate(update);
     }

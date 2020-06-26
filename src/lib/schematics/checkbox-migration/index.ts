@@ -10,21 +10,17 @@ import { getProjectTsConfigPaths } from '@angular/core/schematics/utils/project_
 import { createMigrationProgram } from '../utils/compiler-hosts';
 import * as ts from 'typescript';
 import { relative } from 'path';
-// import { StringReplacementInterface } from '../string-replacement.interface';
+import { StringReplacementInterface } from '../string-replacement.interface';
 
-// const componentPath:string = './src/app/app.component.html';
-//
-// const queryString:string = 'Foobar!';
-// const replaceString:string = 'Foo Bar!!';
 
 let logger:LoggerApi;
 
-// const stringsToReplace:Array<StringReplacementInterface> = [
-//     {
-//         query:       '[inputIsDisabled]',
-//         replacement: '[disabled]'
-//     }
-// ];
+const stringsToReplace:Array<StringReplacementInterface> = [
+    {
+        query:       '[inputIsDisabled]',
+        replacement: '[disabled]'
+    }
+];
 
 // You don't have to export the function as default. You can also have more than one rule factory
 // per file.
@@ -74,16 +70,22 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
             if(tree.exists(templateFileName))
             {
                 let buffer:Buffer | number = tree.read(templateFileName) || 0;
-                let index:number = buffer.toString().indexOf('terra-checkbox');
+                let startIndex:number = buffer.toString().indexOf('terra-checkbox');
+                let endIndex:number = buffer.toString().indexOf('/terra-checkbox');
 
-                while(index >= 0)
+                while(startIndex >= 0)
                 {
                     let update:UpdateRecorder = tree.beginUpdate(templateFileName!);
-                    update.remove(index, 'terra-checkbox'.length);
-                    update.insertRight(index, 'mat-checkbox');
+                    update.remove(startIndex, 'terra-checkbox'.length);
+                    update.insertRight(startIndex, 'mat-checkbox');
+                    tree.commitUpdate(update);
+                    stringsToReplace.forEach((query:StringReplacementInterface) =>
+                    {
+                        replaceTemplateProperties(update, buffer, query.replacement, query.query);
+                    });
                     tree.commitUpdate(update);
                     buffer = tree.read(templateFileName) || 0;
-                    index = buffer.toString().indexOf('terra-checkbox');
+                    startIndex = buffer.toString().indexOf('terra-checkbox');
                 }
             }
         }
@@ -95,15 +97,9 @@ function isComponent(fileName:string):boolean
     return fileName.endsWith('component.ts');
 }
 
-// function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, replaceString:string, queryString:string):void
-// {
-//     const startIndex:number = buffer.toString().indexOf(queryString);
-//     update.insertRight(startIndex, replaceString);
-//     update.remove(startIndex, queryString.length);
-// }
-
-// stringsToReplace.forEach((query:StringReplacementInterface) =>
-// {
-//     replaceTemplateProperties(update, buffer, query.replacement, query.query);
-// });
-// tree.commitUpdate(update);
+function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number, replaceString:string, queryString:string):void
+{
+    const startIndex:number = buffer.toString().indexOf(queryString);
+    update.insertRight(startIndex, replaceString);
+    update.remove(startIndex, queryString.length);
+}

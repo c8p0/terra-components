@@ -97,7 +97,7 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
 {
     stringsToReplace.forEach((query:StringReplacementInterface) =>
     {
-        let queryIndex:number = buffer.toString().indexOf(query.query);
+        let queryIndex:number = buffer.toString().indexOf(query.query, startIndex);
         if(queryIndex > startIndex && queryIndex < endIndex)
         {
             update.remove(queryIndex, query.query.length);
@@ -108,4 +108,15 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
         }
     });
     // TODO: remove inputCaption and put caption between span elements
+    let caption:RegExpMatchArray | null = buffer.toString().match(`\[inputCaption\]="'[a-zA-Z0-9 ]*'"`);
+    if(caption !== null)
+    {
+        let valueIndex:number = caption.indexOf('[inputCaption]') + '[inputCaption]'.length + 1;
+        let value:Array<string> = caption.slice(caption.index, valueIndex);
+        logger.info(value.toString());
+    }
+    else
+    {
+        logger.info('string not found');
+    }
 }

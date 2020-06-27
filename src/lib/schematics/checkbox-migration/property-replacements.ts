@@ -16,5 +16,13 @@ export const stringsToReplace:Array<StringReplacementInterface> = [
     {
         query:       '(isIndeterminateChange)',
         replacement: '(indeterminateChange)'
+    },
+    {
+        query:       '[tooltipPlacement]',
+        replacement: '[placement]'
+    },
+    {
+        query:       '[(value)]',
+        replacement: '[(ngModel)]'
     }
 ];

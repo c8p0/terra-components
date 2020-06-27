@@ -101,7 +101,11 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
         if(queryIndex > startIndex && queryIndex < endIndex)
         {
             update.remove(queryIndex, query.query.length);
-            update.insertRight(queryIndex, query.replacement);
+            if(query.replacement !== null)
+            {
+                update.insertRight(queryIndex, query.replacement);
+            }
         }
     });
+    // TODO: remove inputCaption and put caption between span elements
 }

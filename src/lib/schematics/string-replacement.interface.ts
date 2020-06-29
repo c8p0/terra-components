@@ -1,5 +1,8 @@
 export interface StringReplacementInterface
 {
     query:string;
-    replacement:string;
+    replacement?:string;
+    move?:boolean;
+    create?:Array<string>;
+    insertAfter?:string;
 }

@@ -24,5 +24,11 @@ export const stringsToReplace:Array<StringReplacementInterface> = [
     {
         query:       '[(value)]',
         replacement: '[(ngModel)]'
+    },
+    {
+        query:       'inputCaption',
+        create:     ['<span>', '</span>'],
+        move:       true,
+        insertAfter: ''
     }
 ];

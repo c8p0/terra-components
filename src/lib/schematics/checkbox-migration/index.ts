@@ -70,6 +70,8 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
                     let startIndex:number = index;
                     let endIndex:number = buffer.toString().indexOf('/terra-checkbox');
                     let update:UpdateRecorder = tree.beginUpdate(templateFileName!);
+                    let template:string = '';
+                    template += '<mat-checkbox ';
 
                     replaceTemplateProperties(update, buffer, startIndex, endIndex);
 
@@ -96,30 +98,33 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
 {
     stringsToReplace.forEach((query:StringReplacementInterface) =>
     {
-        let queryIndex:number = buffer.toString().indexOf(query.query, startIndex);
+        const queryIndex:number = buffer.toString().indexOf(query.query, startIndex);
         if(queryIndex > startIndex && queryIndex < endIndex)
         {
-            update.remove(queryIndex, query.query.length);
-            if(query.replacement !== null)
+            if(query.replacement !== null && !query.move)
             {
-                update.insertRight(queryIndex, query.replacement);
+                update.remove(queryIndex, query.query.length);
+                update.insertRight(queryIndex, query.replacement!);
+            }
+            else if(query.move)
+            {
+                let captionValue:{ value:string | null, dataBinding:boolean } = getPropertyValue(buffer.toString(), query.query);
+                if(captionValue.value !== null)
+                {
+                    update.remove(queryIndex, query.query.length);
+                    update.insertRight(queryIndex, captionValue.value.toString());
+                }
             }
         }
     });
-    // TODO: remove inputCaption and put caption between span elements
-    const captionRegEx:RegExp = new RegExp(`\\[?inputCaption\]?="(.*)"`);
-    let captionValue:string = '';
-    let caption:RegExpMatchArray | null = buffer.toString().match(captionRegEx); // \[?inputCaption\]?="(?:('[a-zA-Z0-9 ]*')|\{\{([a-zA-Z0-9 ]*)\}\}|[a-zA-Z0-9 ]*)"
-    if(caption !== null && caption !== undefined)
-    {
-        captionValue = caption[1].toString();
-        if(captionValue !== '')
-        {
-            logger.info(captionValue);
-        }
-    }
-    else
-    {
-        logger.info('string not found');
-    }
+}
+
+
+function getPropertyValue(bufferString:string, property:string):{ value:string | null, dataBinding:boolean }
+{
+    const regExp:RegExp = new RegExp('\\[?' + property + '\\]?="(.*)"');
+    let caption:string, value:string | null;
+    [caption, value] = bufferString.match(regExp) || ['', null];
+
+    return { value: value || null, dataBinding: caption.startsWith('[') };
 }

@@ -13,7 +13,6 @@ import { relative } from 'path';
 import { StringReplacementInterface } from '../string-replacement.interface';
 import { stringsToReplace } from './property-replacements';
 
-
 let logger:LoggerApi;
 
 // You don't have to export the function as default. You can also have more than one rule factory
@@ -22,9 +21,10 @@ export function checkboxMigration(_options:any):Rule
 {
     return (tree:Tree, context:SchematicContext):void =>
     {
-        const { buildPaths, testPaths }:{[key:string]:Array<string>} = getProjectTsConfigPaths(tree);
+        const {buildPaths, testPaths}:{ [key:string]:Array<string> } = getProjectTsConfigPaths(tree);
         const basePath:string = process.cwd();
-        const allPaths:Array<string> = [...buildPaths, ...testPaths];
+        const allPaths:Array<string> = [...buildPaths,
+                                        ...testPaths];
 
         logger = context.logger;
 
@@ -65,7 +65,6 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
             {
                 let buffer:Buffer | number = tree.read(templateFileName) || 0;
                 let index:number = buffer.toString().indexOf('terra-checkbox');
-
                 while(index >= 0)
                 {
                     let startIndex:number = index;
@@ -108,12 +107,16 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
         }
     });
     // TODO: remove inputCaption and put caption between span elements
-    let caption:RegExpMatchArray | null = buffer.toString().match(`\[inputCaption\]="'[a-zA-Z0-9 ]*'"`);
-    if(caption !== null)
+    const captionRegEx:RegExp = new RegExp(`\\[?inputCaption\]?="(.*)"`);
+    let captionValue:string = '';
+    let caption:RegExpMatchArray | null = buffer.toString().match(captionRegEx); // \[?inputCaption\]?="(?:('[a-zA-Z0-9 ]*')|\{\{([a-zA-Z0-9 ]*)\}\}|[a-zA-Z0-9 ]*)"
+    if(caption !== null && caption !== undefined)
     {
-        let valueIndex:number = caption.indexOf('[inputCaption]') + '[inputCaption]'.length + 1;
-        let value:Array<string> = caption.slice(caption.index, valueIndex);
-        logger.info(value.toString());
+        captionValue = caption[1].toString();
+        if(captionValue !== '')
+        {
+            logger.info(captionValue);
+        }
     }
     else
     {

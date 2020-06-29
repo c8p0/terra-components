@@ -70,8 +70,6 @@ function runCkeckboxMigration(tree:Tree, tsconfigPath:string, basePath:string):v
                     let startIndex:number = index;
                     let endIndex:number = buffer.toString().indexOf('/terra-checkbox');
                     let update:UpdateRecorder = tree.beginUpdate(templateFileName!);
-                    let template:string = '';
-                    template += '<mat-checkbox ';
 
                     replaceTemplateProperties(update, buffer, startIndex, endIndex);
 
@@ -101,10 +99,10 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
         const queryIndex:number = buffer.toString().indexOf(query.query, startIndex);
         if(queryIndex > startIndex && queryIndex < endIndex)
         {
-            if(query.replacement !== null && !query.move)
+            if(query.replacement && !query.move)
             {
                 update.remove(queryIndex, query.query.length);
-                update.insertRight(queryIndex, query.replacement!);
+                update.insertRight(queryIndex, query.replacement);
             }
             else if(query.move)
             {
@@ -112,7 +110,8 @@ function replaceTemplateProperties(update:UpdateRecorder, buffer:Buffer | number
                 if(captionValue.value !== null)
                 {
                     update.remove(queryIndex, query.query.length);
-                    update.insertRight(queryIndex, captionValue.value.toString());
+                    let insertString:string = '<' + query.htmlTag + '>' + captionValue.value.toString() + '</' + query.htmlTag + '>';
+                    update.insertLeft(buffer.toString().indexOf(query.insertBefore!, queryIndex), insertString);
                 }
             }
         }

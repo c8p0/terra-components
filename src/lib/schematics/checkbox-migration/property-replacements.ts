@@ -26,9 +26,15 @@ export const stringsToReplace:Array<StringReplacementInterface> = [
         replacement: '[(ngModel)]'
     },
     {
-        query:       'inputCaption',
-        create:     ['<span>', '</span>'],
-        move:       true,
-        insertAfter: ''
+        query:        'inputIcon',
+        htmlTag:      'span class="checkbox-icon icon-delete"',
+        move:         true,
+        insertBefore: '<'
+    },
+    {
+        query:        'inputCaption',
+        htmlTag:      'span',
+        move:         true,
+        insertBefore: '<'
     }
 ];

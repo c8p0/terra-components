@@ -1,5 +1,32 @@
 @import '../../styles/variables';
 
+
+@media(max-width: 600px)
+{
+    .mat-table-container .mat-table
+    {
+        .mat-header-row
+        {
+            display: none;
+        }
+        
+        .mat-row
+        {
+            flex-direction: column;
+            align-items: start;
+            padding: 8px 24px;
+            height: auto;
+            
+            .mobile-label
+            {
+                width: 80px;
+                display: inline-block;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
 .mat-table-container
 {
     margin: var(--space-container);
@@ -54,7 +81,7 @@
             font-size: var(--font-size-4);
             font-weight: var(--font-weight-2);
             @include font-rendering;
-    
+            
             .mat-sort-header-container
             {
                 button.mat-sort-header-button
@@ -130,7 +157,7 @@
                         color: var(--color-structure-13);
                     }
                 }
-    
+                
                 .mat-checkbox
                 {
                     .mat-checkbox-background
@@ -210,6 +237,7 @@
             }
         }
     }
+    
     mat-form-field
     {
         margin-top: 0;

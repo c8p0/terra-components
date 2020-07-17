@@ -11,6 +11,19 @@
             margin: 0;
         }
     }
+    
+    .mat-toolbar
+    {
+        box-shadow: var(--box-shadow);
+        margin-bottom: 0;
+        background-color: white;
+        
+        &.mat-toolbar-single-row
+        {
+            padding: 0;
+            height: calc(var(--height-lg) - var(--space-sm));
+        }
+    }
 }
 
 .mat-table
@@ -173,9 +186,10 @@
 
 .mat-paginator
 {
-    box-shadow: var(--box-shadow);
+    //box-shadow: var(--box-shadow);
     margin-bottom: 0;
-    border-bottom: 1px solid var(--color-structure-3);
+    width: 100%;
+    //border-bottom: 1px solid var(--color-structure-3);
     
     .mat-paginator-outer-container
     {

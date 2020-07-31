@@ -1,0 +1,26 @@
+:host::ng-deep
+{
+    .mat-paginator
+    {
+        display: inline-block;
+    }
+}
+
+.table-settings-container
+{
+    background: var(--color-structure-0);
+    padding: 0 5px;
+    text-align: right;
+    
+    .table-settings-left
+    {
+        display: inline-block;
+        float: left;
+    }
+    
+    .table-settings-right
+    {
+        display: inline-block;
+        
+    }
+}

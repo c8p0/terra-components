@@ -1,5 +1,6 @@
 import {
     Component,
+    ContentChild,
     EventEmitter,
     Input,
     Output
@@ -11,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { TableSettingsDialogComponent } from './dialog/table-settings-dialog.component';
 import { ColumnInterface } from './interface/column.interface';
+import { TerraGroupFunctionComponent } from '../../tables/group-function/terra-group-function.component';
 
 /**
  * Component that displays the settings for a MatTable
@@ -40,6 +42,9 @@ export class TableSettingsComponent
      */
     @Output()
     public selectedColumnsChange:EventEmitter<Array<string>> = new EventEmitter<Array<string>>();
+
+    @ContentChild(TerraGroupFunctionComponent, {static: false})
+    public _groupFunction:TerraGroupFunctionComponent;
 
     @Language()
     public _lang:string;

@@ -1,1 +1,14 @@
-<terra-button inputIcon="icon-settings" [inputTooltipText]="'tableSettings.tooltip' | translate:_lang" (outputClicked)="_openSettings()"></terra-button>
+<div class="table-settings-container">
+    <div class="table-settings-left">
+        <terra-button [inputIcon]="'icon-settings_transfer'"
+                      [inputTooltipText]="'Group function'"
+                      (outputClicked)="_groupFunction.show = !_groupFunction.show">
+        </terra-button>
+    </div>
+    
+    <div class="table-settings-right">
+        <ng-content select="mat-paginator"></ng-content>
+        <terra-button inputIcon="icon-settings" [inputTooltipText]="'tableSettings.tooltip' | translate:_lang" (outputClicked)="_openSettings()"></terra-button>
+    </div>
+</div>
+<ng-content select="terra-group-function"></ng-content>
